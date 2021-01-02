@@ -1,29 +1,37 @@
-function submitForm(e) {
-    const newTask = document.createElement('li')
-    const newTaskValue = document.getElementById('new-task-description').value
-    newTask.innerText = newTaskValue
-    addTask(newTask)
-    e.preventDefault();
-}
-
-function addTask(newTask){
-    const tasks = document.getElementById('tasks')
-    tasks.appendChild(newTask)
-    deleteBtn(newTask)
-}
-function deleteBtn(newTask) {
-    const btn = document.createElement('BUTTON')
-    btn.innerText = ('Delete')
-    btn.setAttribute('id','delete')
-    newTask.appendChild(btn)
-    btn.addEventListener('click', function() {
-        deleteTask(newTask);
-    })
-}
-function deleteTask(newTask){
-    newTask.remove();
-}
 document.addEventListener("DOMContentLoaded", () => {
-    const form = document.getElementById("create-task-form");
-    form.addEventListener('submit', submitForm)
-});
+    console.log("DOM loaded per DOMContentLoaded event") 
+    addTask();
+  
+  });
+  
+  
+  let stack = document.getElementById("list")
+    
+  function addTask(){
+    document.addEventListener("submit", (e) => {  
+    e.preventDefault(); 
+    let post = document.getElementById("tasks")  
+    let textToAdd = document.getElementById("new-task-description").value
+    let listItem = document.createElement('li') 
+    let button = document.createElement('button') 
+    button.setAttribute("class", textToAdd) 
+    button.innerText = textToAdd 
+    listItem.setAttribute("class", textToAdd)
+    listItem.innerHTML = textToAdd 
+    post.appendChild(listItem)  
+    nestedNode = document.getElementsByClassName(textToAdd)
+    let arr = [...nestedNode]
+    arr[0].appendChild(button) 
+      button.onclick = (e) => {
+        console.log("thats better", e)
+        post.remove()
+        console.log("hopethiswork")
+      }
+    });
+  
+   
+  
+  
+  
+  } 
+  
