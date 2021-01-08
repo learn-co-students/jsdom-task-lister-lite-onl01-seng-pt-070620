@@ -1,37 +1,32 @@
 document.addEventListener("DOMContentLoaded", () => {
-    console.log("DOM loaded per DOMContentLoaded event") 
-    addTask();
-  
-  });
-  
-  
-  let stack = document.getElementById("list")
-    
-  function addTask(){
-    document.addEventListener("submit", (e) => {  
-    e.preventDefault(); 
-    let post = document.getElementById("tasks")  
-    let textToAdd = document.getElementById("new-task-description").value
-    let listItem = document.createElement('li') 
-    let button = document.createElement('button') 
-    button.setAttribute("class", textToAdd) 
-    button.innerText = textToAdd 
-    listItem.setAttribute("class", textToAdd)
-    listItem.innerHTML = textToAdd 
-    post.appendChild(listItem)  
-    nestedNode = document.getElementsByClassName(textToAdd)
-    let arr = [...nestedNode]
-    arr[0].appendChild(button) 
-      button.onclick = (e) => {
-        console.log("thats better", e)
-        post.remove()
-        console.log("hopethiswork")
-      }
+  const form = document.getElementById("create-task-form");
+
+  document.querySelector('form').addEventListener('submit', function(e) {
+    let input = document.getElementById('new-task-description').value;
+    let li = document.createElement('li');
+    let liText = document.createTextNode(input);
+    let imp = document.getElementById("new-task-imp").value;
+    if (imp === "first"){
+      li.style.color = "red";
+    } else if (imp === "second") {
+      li.style.color = "orange";
+    } else if (imp === "third") {
+      li.style.color = "green";
+    }
+    let xButton = document.createElement('button');
+    xButton.appendChild(document.createTextNode("X"));
+    xButton.setAttribute("data-description", `${input}`);
+    xButton.addEventListener('click', function(e){
+      this.parentElement.remove();
     });
-  
-   
-  
-  
-  
-  } 
-  
+
+    li.appendChild(liText);
+    li.appendChild(xButton);
+    document.getElementById('tasks').appendChild(li);
+    e.preventDefault();
+
+
+    form.reset();
+    });
+
+});
