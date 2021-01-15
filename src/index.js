@@ -8,7 +8,7 @@ taskForm.addEventListener("submit", function(e) {
   const newTask = document.querySelector("#new-task-description").value 
 
   taskList.innerHTML += `<li> ${newTask} 
-  <button data-action="delete">X for delete</button>
+  <button data-action="delete">Delete Task</button>
   </li>`
 
   taskForm.reset()
