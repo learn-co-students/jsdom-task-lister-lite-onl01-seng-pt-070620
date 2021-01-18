@@ -1,35 +1,29 @@
 const form = document.getElementById("create-task-form");
 const info = document.getElementById("new-task-description");
 const input = document.querySelector('input');
+const todo = document.getElementById("list");
 
-input.addEventListener('input', function(e) {
-  info.textContent = e.target.value
-});
-
-form.addEventListener("submit", function(event) {
-  console.log(info)
-  event.preventDefault();
-  let task = info.textContent
-  console.log(task)
-}
-);
 
 document.addEventListener("DOMContentLoaded", function() => {
-  // your code here
+  input.addEventListener('input', function(e) {
+    info.textContent = e.target.value
+  });
   
-
-  
-
-  
-
-
+  form.addEventListener("submit", function(event) {
+    event.preventDefault();
+    let task = info.textContent;
+    addToList(task);
+    console.log(task);
+  });
 });
 
+function addToList(task) {
+  let list = document.getElementById("tasks")
+  let li = document.createElement("li")
 
+  li.innerHTML = task
+  list.appendChild(li)
 
-let list = document.getElementById("list")
-let l = document.createElement("ul")
-
-const input = document.querySelector('input')
+}
 
 
